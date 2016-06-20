@@ -20,29 +20,7 @@ public class ProductFormValidator implements Validator {
 	@Override
 	public void validate(Object obj, Errors errors) {
 		
-		Product product = (Product) obj;
-		
-		
-		
-		 Pattern pattern;
-		 Matcher matcher;
-		 String ID_PATTERN = "[0-9]+";
-	
-			   pattern = Pattern.compile(ID_PATTERN);
-			   matcher = pattern.matcher(product.getPrice()+"");
-			   if (!matcher.matches()) {
-				   System.out.println("match");
-			    errors.rejectValue("id", "id.incorrect",
-			      "Enter a numeric value");
-			   }else{
-				   System.out.println("un match");
-			   }
-		 
-		
-		
-		
-		
-		
+		Product product = (Product) obj;		
 				
 		if(product.getPrice() < 0){
 			//errors.rejectValue("price", "negativeValue", new Object[]{"'price'"}, "price can't be negative.");

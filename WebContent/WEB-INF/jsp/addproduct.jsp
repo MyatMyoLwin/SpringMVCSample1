@@ -6,34 +6,55 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Add Product</title>
-<spring:url value="/resources/js/validation.js" var="validationJS" />
-<spring:url value="/resources/css/error.css" var="errorCss" />
 
-<script src="${validationJS}"></script>
-<link href="${errorCss}" rel="stylesheet" />
+<%-- <spring:url value="/resources/js/validation.js" var="validationJS" />
+<script src="${validationJS}"></script> --%>
+<spring:url value="/resources/css/errors.css" var="errorsCss" />
+<link href="${errorsCss}" rel="stylesheet" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
 </head>
 <body>
-
-<h2>Add Product</h2>
-	<form:form method="POST" action="/OrderSpring/product" commandName="product">
-		<table>
-			<tr>
-				<td><form:label path="name"> Name</form:label></td>				
-				<td><form:input path="name" /></td>
-				<td><form:errors path="name" class="error"/></td>
-			</tr>
-			<tr>
-				<td><form:label path="price">Price</form:label></td>
-				<td><form:input path="price"  id="price"/></td>
-				<td><form:errors path="price" class="error"/></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="right"><input type="submit" value="Submit"/></td>
-			</tr>
-
-		</table>
-	</form:form>
-
-
+	<%@ include file="header.jsp"%>
+	<div class="container">
+		<div class="col-md-8 col-md-offset-2">
+			<h2>Add Product</h2>
+			<form:form method="POST" action="/OrderSpring/product"
+				commandName="product" class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-2">
+						<form:label path="name"> Name</form:label>
+					</div>
+					<div class="col-sm-5">
+						<form:input path="name" class="form-control" type="text"
+							placeholder="Product Name" />
+					</div>
+					<div class="col-sm-5">
+						<form:errors path="name" class="error" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2">
+						<form:label path="price">Price</form:label>
+					</div>
+					<div class="col-sm-5">
+						<form:input path="price" id="price" class="form-control"
+							type="text" placeholder="Product Price" />
+					</div>
+					<div class="col-sm-5">
+						<form:errors path="price" class="error" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<input type="submit" class="btn btn-info" value="Save" />
+					</div>
+				</div>
+			</form:form>
+		</div>
+	</div>
 </body>
 </html>
