@@ -1,18 +1,9 @@
 @CHARSET "ISO-8859-1";
 
-table.dbtable {
-	//background-color: #3c6ff7;
-	width: 500px;
+th {
+	text-align: center;
 }
 
-table.dbtable th {
-	//background-color: #3c6ff7;
-	padding-top: 5px;
-	padding-bottom: 5px;
-}
-
-table.dbtable td {
-	//background-color: #c2d2fc;
-	padding-top: 5px;
-	padding-bottom: 5px;
+td {
+	text-align: left;
 }

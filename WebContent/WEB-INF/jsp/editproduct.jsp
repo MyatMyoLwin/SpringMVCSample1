@@ -5,35 +5,50 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-<spring:url value="/resources/js/validation.js" var="validationJS" />
-<spring:url value="/resources/css/error.css" var="errorCss" />
 
-<script src="${validationJS}"></script>
-<link href="${errorCss}" rel="stylesheet" />
+<%-- <spring:url value="/resources/js/validation.js" var="validationJS" />
+<script src="${validationJS}"></script>--%>
+<spring:url value="/resources/css/errors.css" var="errorsCss" />
+<link href="${errorsCss}" rel="stylesheet"/> 
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
 </head>
 <body>
+	<%@ include file="header.jsp"%>
+	<div class="container">
+		<div class="col-md-8 col-md-offset-2">
 
-<h2>Edit Product</h2>
-	<form:form method="POST" id="form" action="/OrderSpring/product" commandName="product">
-		<form:hidden path="id"/>
-		<table>
-			<tr>
-				<td><form:label path="name"> Name</form:label></td>
-				<td><form:input path="name"/></td>
-				<td><form:errors path="name" class="error"/></td>
-			</tr>
-			<tr>
-				<td><form:label path="price">Price</form:label></td>
-				<td><form:input path="price"/></td> <!-- id="price" -->
-				<td><form:errors path="price" class="error"/></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="right"><input type="submit" value="Submit" /></td><!-- onclick="javascript: return isNumber('price');" -->
-			</tr>
+			<h2>Edit Product</h2>
 
-		</table>
-	</form:form>
-
+			<form:form method="POST" id="form" action="/OrderSpring/product"
+				commandName="product" class="form-horizontal" role="form">
+				<form:hidden path="id" />
+				<table class="table">
+					<tr>
+						<td><form:label path="name"> Name</form:label></td>
+						<td><form:input path="name" class="form-control" type="text"
+								placeholder="Product Name" /></td>
+						<td><form:errors path="name" class="error"/></td>
+					</tr>
+					<tr>
+						<td><form:label path="price">Price</form:label></td>
+						<td><form:input path="price" class="form-control" type="text"
+								placeholder="Product Name" /></td>
+						<!-- id="price" -->
+						<td><form:errors path="price" class="error" /></td>
+					</tr>
+					<tr>
+						<td colspan="2" align="right"><input type="submit"
+							class="btn btn-info" value="Save" /></td>
+						<!-- onclick="javascript: return isNumber('price');" -->
+					</tr>
+				</table>
+			</form:form>
+		</div>
+	</div>
 
 </body>
 </html>

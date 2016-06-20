@@ -5,62 +5,83 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<spring:url value="/resources/css/table.css" var="tableCSS" />
-<link href="${tableCSS}" rel="stylesheet" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+<spring:url value="/resources/css/body.css" var="bodyCSS" />
+<link href="${bodyCSS}" rel="stylesheet" type="text/css"/>
+
+<%-- <spring:url value="/resources/css/table.css" var="tableCSS" />
+<link href="${tableCSS}" rel="stylesheet" /> --%>
+
 <title>All Products</title>
 </head>
-<body>
-<h2>Product List</h2>
-	<table>
-		<tr>
-			<td><a href="addproduct">New Product</a></td>
-			<td><a href="downloadCSV">Download CSV</a></td>
-		</tr>
-	</table>
-	
-	<br>
+<body class="body">
+	<%@ include file="header.jsp"%>
 
-	<table class="dbtable">
-		<tr>
-			<th>ID</th>
-			<th>Name</th>
-			<th>Price</th>
-			<th colspan="2"></th>
-		</tr>
-		<c:forEach var="product" items="${productList}">
-			<tr align="center">
-				<td>${product.id}</td>
-				<td>${product.name}</td>
-				<td>${product.price}</td>
-				<td><a href="editproduct?id=${product.id}">Edit</a></td>
-				<td><a href="deleteproduct?id=${product.id}"
-					onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>
-			</tr>
-		</c:forEach>
-	</table>
-	
-	<br>
+	<div class="container">
+		<div class="col-md-8 col-md-offset-2">
+			<!-- <div class="container text-center"> -->
 
-	<table cellpadding="5" cellspacing="0">
-		<tr>
-			<c:if test="${currentPage != 1}">
-				<td><a href="product?page=${currentPage - 1}">Previous</a></td>
-			</c:if>
-			<c:forEach begin="1" end="${noOfPages}" var="i">
-				<c:choose>
-					<c:when test="${currentPage eq i}">
-						<td>${i}</td>
-					</c:when>
-					<c:otherwise>
-						<td><a href="product?page=${i}">${i}</a></td>
-					</c:otherwise>
-				</c:choose>
-			</c:forEach>
-			<c:if test="${currentPage lt noOfPages}">
-				<td><a href="product?page=${currentPage + 1}">Next</a></td>
-			</c:if>
-		</tr>
-	</table>
+			<h2>Product List</h2>
+			<table>
+				<tr>
+					<td><a href="addproduct" class="btn btn-info" role="button">New
+							Product</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="downloadCSV"
+						class="btn btn-info" role="button">Download CSV</a></td>
+				</tr>
+			</table>
+
+			<br>
+
+			<div class="table-responsive">
+
+				<table class="table table-striped">
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Price</th>
+						<th>Actions</th>
+					</tr>
+					<c:forEach var="product" items="${productList}">
+						<tr>
+							<td>${product.id}</td>
+							<td>${product.name}</td>
+							<td>${product.price}</td>
+							<td><a href="editproduct?id=${product.id}">Edit</a>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
+								href="deleteproduct?id=${product.id}"
+								onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
+
+			<br>
+
+			<ul class="pagination">
+				<c:if test="${currentPage != 1}">
+					<li><a href="product?page=${currentPage - 1}">Previous</a></li>
+				</c:if>
+				<c:forEach begin="1" end="${noOfPages}" var="i">
+					<c:choose>
+						<c:when test="${currentPage eq i}">
+							<li class="active"><a href="#">${i}</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a href="product?page=${i}">${i}</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				<c:if test="${currentPage lt noOfPages}">
+					<li><a href="product?page=${currentPage + 1}">Next</a></li>
+				</c:if>
+			</ul>
+
+		</div>
+	</div>
 
 </body>
 </html>
