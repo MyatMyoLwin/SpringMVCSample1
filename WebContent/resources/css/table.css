@@ -1,9 +1,8 @@
 @CHARSET "ISO-8859-1";
 
-th {
+.table-striped th {
 	text-align: center;
 }
-
-td {
-	text-align: left;
+.table-striped td {
+	text-align: center;
 }

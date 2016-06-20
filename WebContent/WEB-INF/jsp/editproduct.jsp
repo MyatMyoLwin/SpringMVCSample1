@@ -9,7 +9,7 @@
 <%-- <spring:url value="/resources/js/validation.js" var="validationJS" />
 <script src="${validationJS}"></script>--%>
 <spring:url value="/resources/css/errors.css" var="errorsCss" />
-<link href="${errorsCss}" rel="stylesheet"/> 
+<link href="${errorsCss}" rel="stylesheet" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -22,30 +22,38 @@
 		<div class="col-md-8 col-md-offset-2">
 
 			<h2>Edit Product</h2>
-
-			<form:form method="POST" id="form" action="/OrderSpring/product"
+			<form:form method="POST" action="/OrderSpring/product"
 				commandName="product" class="form-horizontal" role="form">
 				<form:hidden path="id" />
-				<table class="table">
-					<tr>
-						<td><form:label path="name"> Name</form:label></td>
-						<td><form:input path="name" class="form-control" type="text"
-								placeholder="Product Name" /></td>
-						<td><form:errors path="name" class="error"/></td>
-					</tr>
-					<tr>
-						<td><form:label path="price">Price</form:label></td>
-						<td><form:input path="price" class="form-control" type="text"
-								placeholder="Product Name" /></td>
-						<!-- id="price" -->
-						<td><form:errors path="price" class="error" /></td>
-					</tr>
-					<tr>
-						<td colspan="2" align="right"><input type="submit"
-							class="btn btn-info" value="Save" /></td>
-						<!-- onclick="javascript: return isNumber('price');" -->
-					</tr>
-				</table>
+				<div class="form-group">
+					<div class="col-sm-2">
+						<form:label path="name"> Name</form:label>
+					</div>
+					<div class="col-sm-5">
+						<form:input path="name" class="form-control" type="text"
+							placeholder="Product Name" />
+					</div>
+					<div class="col-sm-5">
+						<form:errors path="name" class="error" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2">
+						<form:label path="price">Price</form:label>
+					</div>
+					<div class="col-sm-5">
+						<form:input path="price" id="price" class="form-control"
+							type="text" placeholder="Product Price" />
+					</div>
+					<div class="col-sm-5">
+						<form:errors path="price" class="error" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<input type="submit" class="btn btn-info" value="Save" />
+					</div>
+				</div>
 			</form:form>
 		</div>
 	</div>

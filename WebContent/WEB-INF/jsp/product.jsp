@@ -11,10 +11,15 @@
 	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 <spring:url value="/resources/css/body.css" var="bodyCSS" />
-<link href="${bodyCSS}" rel="stylesheet" type="text/css"/>
+<link href="${bodyCSS}" rel="stylesheet" type="text/css" />
 
-<%-- <spring:url value="/resources/css/table.css" var="tableCSS" />
-<link href="${tableCSS}" rel="stylesheet" /> --%>
+<spring:url value="/resources/css/table.css" var="tableCSS" />
+<link href="${tableCSS}" rel="stylesheet" />
+
+<spring:url value="/resources/css/img.css" var="imgCSS" />
+<link href="${imgCSS}" rel="stylesheet" />
+
+<spring:url value="/resources/images" var="images" />
 
 <title>All Products</title>
 </head>
@@ -50,10 +55,11 @@
 							<td>${product.id}</td>
 							<td>${product.name}</td>
 							<td>${product.price}</td>
-							<td><a href="editproduct?id=${product.id}">Edit</a>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a
-								href="deleteproduct?id=${product.id}"
-								onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>
+							<td><a href="editproduct?id=${product.id}"> <img
+									src="${images}/edit.png" title="edit" /></a>&nbsp;<a href="deleteproduct?id=${product.id}"
+								onclick="return confirm('Are you sure you want to delete?')"><img src="${images}/delete.png" title="delete" />
+								
+							</a></td>
 						</tr>
 					</c:forEach>
 				</table>

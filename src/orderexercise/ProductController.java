@@ -45,13 +45,6 @@ public class ProductController {
 		binder.setValidator(validator);
 	}
 	
-	@ModelAttribute("product")
-	public Product createProductModel() {
-		return new Product();
-	}
-	
-	
-
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public String initialPath() {
 		return "redirect:product";
@@ -92,10 +85,9 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/product", method = RequestMethod.POST)
-	public String addAndUpdateProduct(@Validated Product product, BindingResult result,
-			ModelMap model) {
-		
-		
+	public String addAndUpdateProduct(@ModelAttribute("product") @Validated Product product, BindingResult result,
+			ModelMap model) { 
+				
 		if (result.hasErrors()) {
 			if (product.getId() != 0) {
 				return "editproduct";
@@ -120,7 +112,7 @@ public class ProductController {
 	@RequestMapping(value = "/addproduct", method = RequestMethod.GET)
 	public ModelAndView addProduct() {
 
-		ModelAndView modelView = new ModelAndView("addproduct", "command", new Product());
+		ModelAndView modelView = new ModelAndView("addproduct", "product", new Product());
 		return modelView;
 	}
 
@@ -130,8 +122,8 @@ public class ProductController {
 		int id = Integer.parseInt(request.getParameter("id"));
 
 		Product product = findProductById(id);
-
-		ModelAndView modelView = new ModelAndView("editproduct", "command", product);
+		
+		ModelAndView modelView = new ModelAndView("editproduct", "product", product);
 		return modelView;
 	}
 
