@@ -1,8 +1,10 @@
 package orderexercise;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -26,6 +28,8 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -158,7 +162,7 @@ public class ProductController {
 		return product;
 	}
 
-	public boolean saveProductsToFile(File productFile) throws Exception {
+	public boolean saveProductsInFile(File productFile) throws Exception {
 
 		if (productFile.exists()) {
 			productFile.delete();
@@ -180,22 +184,26 @@ public class ProductController {
 	@RequestMapping(value = "/downloadCSV", method = RequestMethod.GET)
 	public void downloadCSV(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-		try {
+		try {		
 			int BUFFER_SIZE = 4096;
-
-			String filePath = "/downloads/products.csv";
 
 			ServletContext context = request.getServletContext();
 			String appPath = context.getRealPath("");
+			File dir = new File(appPath + File.separator + "downloads");
+			
+			if (!dir.exists()) {
+				dir.mkdirs();
+			}
 
-			String fullPath = appPath + filePath;
+			String fullPath = dir.getAbsolutePath() + File.separator + "products.csv";
 			File downloadFile = new File(fullPath);
 
-			if (saveProductsToFile(downloadFile)) {
+			if (saveProductsInFile(downloadFile)) {
 
 				FileInputStream inputStream = new FileInputStream(downloadFile);
 
 				String mimeType = context.getMimeType(fullPath);
+
 				if (mimeType == null) {
 					mimeType = "application/octet-stream";
 				}
@@ -228,6 +236,69 @@ public class ProductController {
 
 		}
 
+	}
+	
+	@RequestMapping(value = "/uploadCSV", method = RequestMethod.GET)
+	public ModelAndView uploadCSV() {
+	
+		ModelAndView modelView = new ModelAndView("uploadCSV");
+		return modelView;
+		
+	}
+	
+	@RequestMapping(value = "/uploadCSV", method = RequestMethod.POST)
+	public String uploadCSV(@RequestParam("file") MultipartFile file, HttpServletRequest request, ModelMap model) {
+		
+		String errorMsg = "";
+
+		try {
+			if (!file.isEmpty()) {
+				byte[] bytes = file.getBytes();
+
+				// Creating the directory to store file
+				ServletContext context = request.getServletContext();
+				String appPath = context.getRealPath("");
+				File dir = new File(appPath + File.separator + "uploads");
+				if (!dir.exists()) {
+					dir.mkdirs();
+				}
+
+				// Create the file on server
+				File serverFile = new File(dir.getAbsolutePath() + File.separator + "products.csv");
+				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+				stream.write(bytes);
+				stream.close();
+
+				saveCSVinDatabae(serverFile);
+
+				return "redirect:product";
+				
+			} else {
+				errorMsg = errorMsg + "file is empty<br>";
+			}
+
+		} catch (Exception e) {
+			errorMsg = errorMsg + "error in uploading file";
+			e.printStackTrace();
+		}
+
+		model.addAttribute("errorMessage", errorMsg);
+		return "uploadCSV";
+
+	}
+
+	private boolean saveCSVinDatabae(File file) throws Exception{
+	
+			for (String line : Files.readAllLines(file.toPath())) {
+				String[] parts = line.split(",");
+				
+				Product product = new Product();
+				product.setName(parts[0]);
+				product.setPrice(Integer.parseInt(parts[1]));
+				productDao.add(product);
+			}
+		
+		return true;
 	}
 
 }

@@ -1,0 +1,11 @@
+.file::-webkit-file-upload-button {
+    background: #5bc0de;
+    border: none;
+    color: white;
+    width: 100px;
+    height: 35px;
+    border-radius: 5px;
+}
+ .file::-webkit-file-upload-button:hover{
+  background-color: #31b0d5;
+}

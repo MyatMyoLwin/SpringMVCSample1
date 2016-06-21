@@ -35,7 +35,10 @@
 				<tr>
 					<td><a href="addproduct" class="btn btn-info" role="button">New
 							Product</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="downloadCSV"
-						class="btn btn-info" role="button">Download CSV</a></td>
+						class="btn btn-info" role="button">Download CSV</a>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="uploadCSV"
+						class="btn btn-info" role="button">Upload CSV</a></td>
 				</tr>
 			</table>
 
