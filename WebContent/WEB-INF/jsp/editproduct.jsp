@@ -50,7 +50,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
+					<div class="col-sm-offset-2 col-sm-12">
 						<input type="submit" class="btn btn-info" value="Save" />
 					</div>
 				</div>

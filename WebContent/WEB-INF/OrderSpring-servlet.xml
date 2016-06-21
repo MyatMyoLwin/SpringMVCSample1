@@ -60,7 +60,13 @@
 	</bean>
 
 	<bean id="productValidator" class="orderexercise.ProductFormValidator" />
-	
+
+	<bean
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+		id="multipartResolver">
+		<property name="maxUploadSize" value="500000" />
+	</bean>
+
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<mvc:annotation-driven />
 	<mvc:default-servlet-handler/>
