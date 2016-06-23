@@ -6,7 +6,7 @@ package orderexercise;
 
 
 import java.sql.SQLException;
-import java.util.List;
+import java.util.ArrayList;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -26,11 +26,11 @@ public class ProductDAL {
 		this.sessionFactory = sessionFactory;
 	}
 	
-	public List<Product> getAll() throws SQLException, ClassNotFoundException {
+	public ArrayList<Product> getAll() throws SQLException, ClassNotFoundException {
 		
 		org.hibernate.Session session = sessionFactory.openSession();
 		Query query = session.createQuery("from Product");
-		List<Product> products = query.list();
+		ArrayList<Product> products = (ArrayList<Product>) query.list();
 		return products;
 
 	}

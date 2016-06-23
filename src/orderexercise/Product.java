@@ -10,11 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-import org.springframework.format.annotation.NumberFormat;
-import org.springframework.format.annotation.NumberFormat.Style;
 
 
 @Entity
@@ -29,7 +24,7 @@ public class Product{
 	String name;
 	int price;
 	
-	public Product() {	}
+	public Product() {}
 	
 	public Product(int id, String name, int price) {
 		this.id = id;

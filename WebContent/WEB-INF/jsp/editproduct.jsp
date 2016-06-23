@@ -25,6 +25,14 @@
 			<form:form method="POST" action="/OrderSpring/product"
 				commandName="product" class="form-horizontal" role="form">
 				<form:hidden path="id" />
+				<%-- <div class="form-group">
+					<div class="col-sm-2">
+						<form:label path="id"> Id</form:label>
+					</div>
+					<div class="col-sm-5">
+						<form:input path="id" class="form-control" type="number" disabled="true" />
+					</div>
+				</div> --%>
 				<div class="form-group">
 					<div class="col-sm-2">
 						<form:label path="name"> Name</form:label>

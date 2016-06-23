@@ -8,7 +8,6 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 
@@ -35,7 +34,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ProductController {
 
-	List<Product> productList;
+	ArrayList<Product> productList;
 
 	@Autowired
 	private ProductDAL productDao;
@@ -49,11 +48,18 @@ public class ProductController {
 		binder.setValidator(validator);
 	}
 	
-	@RequestMapping(path = "/", method = RequestMethod.GET)
+/*	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public String initialPath() {
-		return "redirect:product";
+		return "login";
 	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public ModelAndView login(@ModelAttribute("user") User user) {
 
+		ModelAndView modelView = new ModelAndView("login", "user", new User());
+		return modelView;
+	}
+	*/
 	@RequestMapping(value = "/product", method = RequestMethod.GET)
 	public ModelAndView showProducts(HttpServletRequest request, HttpServletResponse response) {
 
@@ -89,9 +95,10 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/product", method = RequestMethod.POST)
-	public String addAndUpdateProduct(@ModelAttribute("product") @Validated Product product, BindingResult result,
-			ModelMap model) { 
+	public String addAndUpdateProduct(@ModelAttribute("product") @Validated Product product, BindingResult result) { 
 				
+		System.out.println("product id "+product.getId()+"/"+product.getName()+"/"+product.getPrice());
+		
 		if (result.hasErrors()) {
 			if (product.getId() != 0) {
 				return "editproduct";
