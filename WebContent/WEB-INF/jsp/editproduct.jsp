@@ -17,22 +17,22 @@
 
 </head>
 <body>
-	<%@ include file="header.jsp"%>
+	<%@ include file="headerLogin.jsp"%>
 	<div class="container">
 		<div class="col-md-8 col-md-offset-2">
 
 			<h2>Edit Product</h2>
 			<form:form method="POST" action="/OrderSpring/product"
 				commandName="product" class="form-horizontal" role="form">
-				<form:hidden path="id" />
-				<%-- <div class="form-group">
+				<%-- <form:hidden path="id" /> --%>
+				<div class="form-group">
 					<div class="col-sm-2">
 						<form:label path="id"> Id</form:label>
 					</div>
 					<div class="col-sm-5">
 						<form:input path="id" class="form-control" type="number" disabled="true" />
 					</div>
-				</div> --%>
+				</div>
 				<div class="form-group">
 					<div class="col-sm-2">
 						<form:label path="name"> Name</form:label>

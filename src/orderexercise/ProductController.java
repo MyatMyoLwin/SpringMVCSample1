@@ -15,7 +15,10 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.annotation.Autowired;
+/*import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+*/import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -87,8 +90,24 @@ public class ProductController {
 			lastIndex = productList.size();
 		}
 		
+/*		JSONObject productJSON = new JSONObject();
+		try
+		{
+		    JSONArray products = new JSONArray();
+		    for (Product product : productList)
+		    {
+		         JSONObject tempJSON = new JSONObject();
+		         tempJSON.put("id", product.getId());
+		         tempJSON.put("name", product.getName());
+		         tempJSON.put("price", product.getPrice());
+		         products.put(tempJSON);
+		    }
+		    productJSON.put("products", products);
+		} catch (JSONException e) {
+		    e.printStackTrace();
+		}*/		
 		ModelAndView modelView = new ModelAndView("product");
-		modelView.addObject("productList", productList.subList(startIndex, lastIndex));
+		modelView.addObject("productList", productList.subList(startIndex, lastIndex).toArray());
 		modelView.addObject("noOfPages", noOfPages);
 		modelView.addObject("currentPage", page);
 		return modelView;

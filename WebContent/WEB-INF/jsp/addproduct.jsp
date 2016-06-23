@@ -18,7 +18,7 @@
 
 </head>
 <body>
-	<%@ include file="header.jsp"%>
+	<%@ include file="headerLogin.jsp"%>
 	<div class="container">
 		<div class="col-md-8 col-md-offset-2">
 			<h2>Add Product</h2>

@@ -21,30 +21,50 @@
 
 <spring:url value="/resources/images" var="images" />
 
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+<script>
+
+angular.module('product', []).controller('productsCtrl', function($scope) {
+		$scope.products = [
+        {id:'123',name:'mouse',price:'100'},
+        {id:'124',name:'screen guard',price:'10000'},
+        {id:'125',name:'Tape',price:'300'},
+        {id:'126',name:'adapter',price:'23000'},
+        {id:'127',name:'Harddisk',price:'30000'},
+        {id:'128',name:'memory stick',price:'4200'}        
+        ];
+});
+
+</script>
+
 <title>All Products</title>
 </head>
 <body class="body">
-	<%@ include file="header.jsp"%>
+	<%@ include file="headerLogin.jsp"%>
 
 	<div class="container">
 		<div class="col-md-8 col-md-offset-2">
 			<!-- <div class="container text-center"> -->
 
 			<h2>Product List</h2>
-			<table>
-				<tr>
-					<td><a href="addproduct" class="btn btn-info" role="button">New
-							Product</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="downloadCSV"
-						class="btn btn-info" role="button">Download CSV</a>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<a href="uploadCSV"
-						class="btn btn-info" role="button">Upload CSV</a></td>
-				</tr>
-			</table>
+			<div ng-app="product" ng-controller="productsCtrl">
+				<table width="600">
+					<tr>
+						<td><a href="addproduct" class="btn btn-info" role="button">New
+								Product</a></td>
+						<td><a href="downloadCSV" class="btn btn-info" role="button">Download
+								CSV</a></td>
+						<td><a href="uploadCSV" class="btn btn-info" role="button">Upload
+								CSV</a></td>
+						<td><input type="text" class="form-control" ng-model="search" /></td>
 
-			<br>
+					</tr>
+				</table>
 
-			<div class="table-responsive">
+				<br>
+
+				<%-- <div class="table-responsive">
 
 				<table class="table table-striped">
 					<tr>
@@ -66,6 +86,31 @@
 						</tr>
 					</c:forEach>
 				</table>
+			</div> --%>
+				<div class="table-responsive">
+					<table class="table table-striped">
+						<tr>
+							<th>ID</th>
+							<th>Name</th>
+							<th>Price</th>
+							<th>Actions</th>
+						</tr>
+						<tr ng-repeat="p in products | filter : search">
+							<td>{{ p.id }}</td>
+							<td>{{ p.name }}</td>
+							<td>{{ p.price }}</td>
+							<td><a href="editproduct?id={{ p.id }}"> <img
+									src="${images}/edit.png" title="edit" /></a>&nbsp;<a href="deleteproduct?id={{ p.id }}"
+								onclick="return confirm('Are you sure you want to delete?')"><img src="${images}/delete.png" title="delete" />
+								
+							</a></td>
+						</tr>
+					</table>
+				<!-- 	<ul>
+						<li ng-repeat="x in names">{{ x.name + ', ' +
+							x.country }}</li>
+					</ul> -->
+				</div>
 			</div>
 
 			<br>
