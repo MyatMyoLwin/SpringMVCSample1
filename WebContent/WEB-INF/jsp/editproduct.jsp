@@ -24,7 +24,7 @@
 			<h2>Edit Product</h2>
 			<form:form method="POST" action="/OrderSpring/product"
 				commandName="product" class="form-horizontal" role="form">
-				<%-- <form:hidden path="id" /> --%>
+				<form:hidden path="id" />
 				<div class="form-group">
 					<div class="col-sm-2">
 						<form:label path="id"> Id</form:label>

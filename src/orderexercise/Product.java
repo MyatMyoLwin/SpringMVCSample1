@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -22,6 +24,8 @@ public class Product{
 	int id;
 	
 	String name;
+	@NotNull
+    @Size(min=1,max=3)
 	int price;
 	
 	public Product() {}

@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 
@@ -51,18 +52,6 @@ public class ProductController {
 		binder.setValidator(validator);
 	}
 	
-/*	@RequestMapping(path = "/", method = RequestMethod.GET)
-	public String initialPath() {
-		return "login";
-	}
-	
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView login(@ModelAttribute("user") User user) {
-
-		ModelAndView modelView = new ModelAndView("login", "user", new User());
-		return modelView;
-	}
-	*/
 	@RequestMapping(value = "/product", method = RequestMethod.GET)
 	public ModelAndView showProducts(HttpServletRequest request, HttpServletResponse response) {
 
@@ -90,11 +79,11 @@ public class ProductController {
 			lastIndex = productList.size();
 		}
 		
-/*		JSONObject productJSON = new JSONObject();
+		JSONArray products = new JSONArray();
+		List<Product> transferList = productList.subList(startIndex, lastIndex);
 		try
 		{
-		    JSONArray products = new JSONArray();
-		    for (Product product : productList)
+		    for (Product product : transferList)
 		    {
 		         JSONObject tempJSON = new JSONObject();
 		         tempJSON.put("id", product.getId());
@@ -102,12 +91,12 @@ public class ProductController {
 		         tempJSON.put("price", product.getPrice());
 		         products.put(tempJSON);
 		    }
-		    productJSON.put("products", products);
 		} catch (JSONException e) {
 		    e.printStackTrace();
-		}*/		
+		}	
+		
 		ModelAndView modelView = new ModelAndView("product");
-		modelView.addObject("productList", productList.subList(startIndex, lastIndex).toArray());
+		modelView.addObject("productList", products.toString());
 		modelView.addObject("noOfPages", noOfPages);
 		modelView.addObject("currentPage", page);
 		return modelView;

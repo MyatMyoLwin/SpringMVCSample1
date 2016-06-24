@@ -22,20 +22,12 @@
 <spring:url value="/resources/images" var="images" />
 
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-
 <script>
-
-angular.module('product', []).controller('productsCtrl', function($scope) {
-		$scope.products = [
-        {id:'123',name:'mouse',price:'100'},
-        {id:'124',name:'screen guard',price:'10000'},
-        {id:'125',name:'Tape',price:'300'},
-        {id:'126',name:'adapter',price:'23000'},
-        {id:'127',name:'Harddisk',price:'30000'},
-        {id:'128',name:'memory stick',price:'4200'}        
-        ];
+angular.module('products', []).controller('productsCtrl', function($scope) {
+    $scope.orderByMe = function(x) {
+        $scope.myOrderBy = x;
+    }
 });
-
 </script>
 
 <title>All Products</title>
@@ -48,7 +40,8 @@ angular.module('product', []).controller('productsCtrl', function($scope) {
 			<!-- <div class="container text-center"> -->
 
 			<h2>Product List</h2>
-			<div ng-app="product" ng-controller="productsCtrl">
+			<p id="test">test</p>
+			<div ng-app="products" ng-controller="productsCtrl" ng-init='products = ${productList}'>
 				<table width="600">
 					<tr>
 						<td><a href="addproduct" class="btn btn-info" role="button">New
@@ -90,12 +83,12 @@ angular.module('product', []).controller('productsCtrl', function($scope) {
 				<div class="table-responsive">
 					<table class="table table-striped">
 						<tr>
-							<th>ID</th>
-							<th>Name</th>
-							<th>Price</th>
+							<th ng-click="orderByMe('id')">ID</th>
+							<th ng-click="orderByMe('name')">Name</th>
+							<th ng-click="orderByMe('price')">Price</th>
 							<th>Actions</th>
 						</tr>
-						<tr ng-repeat="p in products | filter : search">
+						<tr ng-repeat="p in products | filter : search | orderBy:myOrderBy">
 							<td>{{ p.id }}</td>
 							<td>{{ p.name }}</td>
 							<td>{{ p.price }}</td>

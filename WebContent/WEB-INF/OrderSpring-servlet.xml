@@ -97,8 +97,6 @@
 	</bean>
 
 	<bean id="productValidator" class="orderexercise.ProductFormValidator" />
-	
-	<!-- <bean id="loginValidator" class="orderexercise.LoginFormValidator" /> -->
 
 	<bean
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
